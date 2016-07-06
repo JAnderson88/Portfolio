@@ -2,8 +2,85 @@
 <html>
 <head>
 	<title>My Portfolio Site for Jeremiah the Great</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+	</script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="js/jquery-mousewheel-master/jquery.mousewheel.js"></script>
+	<script src="js/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
-Hello World!
+<img src="" id="bg">
+<div class="hf" id="header">
+	<div id="name"><h2>Jeremy Evan Anderson</h2></div>
+	<div id="link_container">
+		<a href="https://www.linkedin.com/in/jeremy-anderson-0a3103ab
+"><i class="fa fa-linkedin-square" aria-hidden="true" style="font-size:48px;"></i></a>
+		<a href="https://twitter.com/JAndersonzzz"><i class="fa fa-twitter-square" aria-hidden="true" style="font-size: 48px;"></i></a>
+		<a href="https://github.com/JAnderson88"<i class="fa fa-github" aria-hidden="true" style="font-size: 48px;"></i></a>
+	</div>
+	<div class="email" id="linkedin"></div>
+	<div class="email" id="twitter"></div>
+	<div class="email" id="git"></div>
+</div>
+<div class="line" id="line"></div>
+<div class="hf" id="footer"></div>
+<div class="inner" id="pic">
+	<img src= "self.jpg" width="90%" height="90%" opacity="1">
+</div>
+<div class="inner" id="bio">
+	<p>&nbsp Biography</p>
+	<br>
+	<p> &nbsp Jeremy Anderson was born and raised in Miami, FL to Jamaican immigrant parents. Learning the meaning of hard work and due dilligence through their example, he applied these virtues in the process of teaching himself how to program Javascript, CSS, HTML5, and PHP by finding videos and other resources online, while attending Florida International Univerisity to his BA in Economics with a minor Labor Studies. Using this knowledge he began a coding class at CARE (Christian Academy for Reaching Excellence) Elementary where he currently works. He is now in the process of completing Wyncode, the premier coding bootcamp in South Florida, then to apply the knowledge he's learned to develop a coding academy specializing in teaching elementary and middle school students the basics of programming. 
+</div>
+
+	<script>
+		$(function(){
+			$("#pic").hide();
+			$("#bio").hide();
+			var height = $(window).height();
+			var width = $(window).width();
+			var backg = ["icon6.jpg", "icon7.jpg", "icon8.jpg", "icon9.jpg", "icon9.png"];
+			var r = Math.random()*4;
+			r = Math.round(r);
+			var bg = $("#bg");
+			var tracker = 0;
+			var width_change = 0;
+			var set = false;
+			$("#bg").attr("src", backg[r]);
+			bg.css('width',width);
+			bg.css('height', height);
+			$(window).on('mousewheel', function(event) {
+   				var y = $("#line").position().top;
+				y += Math.round(event.deltaY * event.deltaFactor * 0.2);
+				tracker += Math.round(event.deltaY * event.deltaFactor * 0.2);
+				if(y <= 140 && set == false && tracker <= 600){
+					$("#line").height(Math.round(tracker * 0.7));
+					$("#line").offset({top: y});
+				} else if(y > 140 && tracker < 600 && set == false){
+					$("#line").height(Math.round(tracker * 0.7));
+				} else if(tracker >= 600 && set == false){
+					tracker = 600;
+					set = true;
+					loadProfile();	
+				}
+
+				console.log(event.deltaY);
+				if(y<=0){ 
+					y = 0 
+				} else if(y > 500){ 
+					$(window).height("678px");
+					y = 678-170;
+				}
+
+				
+			});
+		});
+		function loadProfile(){
+			$("#pic").fadeIn(1400);
+			$("#bio").fadeIn(1400);
+		}
+	</script>
 </body>
-</html>
